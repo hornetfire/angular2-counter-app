@@ -6,7 +6,12 @@ import { Component } from '@angular/core';
     template: `
         <div>
             <h2>Counter Component</h2>
+            <p>Count {{currentValue}}</p>
+            <counter-logic></counter-logic>
         </div>
         `
 })
-export class CounterComponent {}
+export class CounterComponent 
+{
+    currentValue: Number = 5;
+}
