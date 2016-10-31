@@ -7,11 +7,10 @@ import { Component } from '@angular/core';
         <div>
             <h2>Counter Component</h2>
             <p>Count {{currentValue}}</p>
-            <counter-logic></counter-logic>
+            <counter-logic [counterValue]="currentValue"></counter-logic>
         </div>
         `
 })
-export class CounterComponent 
-{
+export class CounterComponent {
     currentValue: Number = 5;
 }

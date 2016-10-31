@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';  
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'counter-logic',
@@ -6,7 +6,10 @@ import { Component} from '@angular/core';
     template: `
         <div>
             <h4>Counter Logic Component</h4>
+            <p>Count: {{counterValue}}</p>
         </div>
     `
 })
-export class CounterLogicComponent {}
+export class CounterLogicComponent {
+    @Input() counterValue: number = 0;
+}
