@@ -1,20 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CounterLogicComponent } from './counter-logic.component';
+import { CounterService } from './counter.service';
 
 @Component({
     selector: 'counter',
-    styles: [`div { border: solid 1px blue; margin: 10px; padding: 10px; }`],
     template: `
-        <div>
-            <h2>Counter Component</h2>
-            <p>Count {{currentValue}}</p>
+            <p>Count: {{currentValue}}</p>
             <counter-logic [counterValue]="currentValue" (counterChanged)="updateCurrentCount($event)"></counter-logic>
-        </div>
-        `
+        `,
+    providers: [CounterService]
 })
-export class CounterComponent {
-    currentValue: Number = 5;
+export class CounterComponent implements OnInit {
+    currentValue: Number = 0;
+
+    constructor(private _counterService: CounterService) { }
+
+    ngOnInit() {
+        this.getCurrentValue();
+    }
 
     updateCurrentCount(currentCount: number) {
         this.currentValue = currentCount;
+    }
+    getCurrentValue() {
+        this.currentValue = this._counterService.getCount();
     }
 }
