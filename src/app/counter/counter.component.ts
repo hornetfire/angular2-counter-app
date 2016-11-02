@@ -13,23 +13,26 @@ import { LoggerService } from '../logger/logger.service';
     providers: [CounterService, LoggerService]
 })
 export class CounterComponent implements OnInit {
-    loggerName: string = "counter";
+    loggingName: string = "counter";
     currentValue: Number = 0;
 
     constructor(private _counterService: CounterService, private _loggerService: LoggerService) { }
 
     ngOnInit() {
         this.getCurrentValue();
-        this._loggerService.log("ngOnInit", this.loggerName);
+        this._loggerService.log("ngOnInit", this.loggingName);
     }
 
     updateCurrentCount(currentCount: number) {
         this.currentValue = currentCount;
-        this._loggerService.log("updateCurrentCount_currentValue:" + this.currentValue, this.loggerName);
+        this._loggerService.log("updateCurrentCount_currentValue:" + this.currentValue, this.loggingName);
     }
     getCurrentValue() {
-        this.currentValue = this._counterService.getCount();
-        this._loggerService.log("getCurrentValue_currentValue:" + this.currentValue, this.loggerName);
+        this._counterService.getCount()
+            .subscribe((result) => {
+                this.currentValue = result.count;
+            });
+        this._loggerService.log("getCurrentValue_currentValue:" + this.currentValue, this.loggingName);
     }
 }
 
