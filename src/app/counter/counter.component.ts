@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, UrlTree, UrlSegment, PRIMARY_OUTLET } from '@angular/router';
 import { CounterLogicComponent } from './counter-logic.component';
 import { CounterService } from './counter.service';
 import { LoggerService } from '../logger/logger.service';
@@ -16,11 +16,23 @@ export class CounterComponent implements OnInit {
     loggingName: string = "counter";
     currentValue: Number = 0;
 
-    constructor(private _counterService: CounterService, private _loggerService: LoggerService) { }
+    constructor(private _counterService: CounterService, private _loggerService: LoggerService, private _route: ActivatedRoute, private router: Router) {
+        // const tree: UrlTree = router.parseUrl('/team;id=33');
+        // const g: any = tree.root.children[PRIMARY_OUTLET];
+        // const s: UrlSegment[] = g.segments;
+        // //s[0].path; // returns 'team'
+        // //s[0].parameters; // returns {id: 33}
+
+        // console.log(s[0].path);
+        // console.log(s[0].parameters);
+        console.log("Log url: " + this.router.url);
+    }
 
     ngOnInit() {
         this.getCurrentValue();
-        this._loggerService.log("ngOnInit", this.loggingName);
+        //this._route.params.subscribe((data) => { this._loggerService.log(data.params[''], this.loggingName); })
+        this._loggerService.log('ngOnInit', this.loggingName);
+        //console.log(this._route.component);
     }
 
     updateCurrentCount(currentCount: number) {
@@ -35,8 +47,3 @@ export class CounterComponent implements OnInit {
         this._loggerService.log("getCurrentValue_currentValue:" + this.currentValue, this.loggingName);
     }
 }
-
-// Question's
-// 
-// How to get ActivatedRoute working?
-// https://www.barbarianmeetscoding.com/blog/2016/07/07/updating-your-angular-2-app-to-use-the-new-router/

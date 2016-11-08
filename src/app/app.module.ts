@@ -4,15 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { CounterComponent } from './counter/counter.component';
 import { CounterLogicComponent } from './counter/counter-logic.component';
-import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
-
-const routes: Routes = [
-  { path: 'route-test', component: CounterComponent },
-];
+import { AppRoutingModule } from './app.routes';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, HttpModule],
+  imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule],
   declarations: [AppComponent, CounterComponent, CounterLogicComponent],
   providers: [],
   bootstrap: [AppComponent]
